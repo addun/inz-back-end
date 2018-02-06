@@ -6,20 +6,14 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const sassMiddleware = require('node-sass-middleware');
 const mongoose = require('mongoose');
-const index = require('./routes/index');
-const users = require('./routes/users');
-
 const app = express();
 
 mongoose.connect('mongodb://localhost/test');
-const Cat = mongoose.model('Cat', {name: String});
-
-const kitty = new Cat({name: 'Zildjian'});
-kitty.save().then(() => console.log('meow'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -35,8 +29,8 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+const patterns = require('./patterns/patterns.routers');
+app.use('/patterns', patterns);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
