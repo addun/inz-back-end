@@ -1,15 +1,15 @@
-const PatternModel = require('./forms.models');
+const FormModel = require('./forms.models');
 
 module.exports = {
     getAll: function (req, res) {
-        PatternModel.find({})
+        FormModel.find({})
             .then(models => {
                 res.send(models);
             });
     },
     getInputs: function (req, res) {
         const formId = req.params['formId'];
-        PatternModel
+        FormModel
             .findById(formId)
             .then(foundForm => {
                 res.send(foundForm.inputs);
@@ -17,8 +17,9 @@ module.exports = {
     },
 
     addNew: function (req, res) {
-        const p = new PatternModel(req.body);
-        p.save()
+        const form = new FormModel(req.body);
+        form
+            .save()
             .then(savedModel => {
                 res.send(savedModel);
             });
@@ -27,10 +28,10 @@ module.exports = {
     addData: function (req, res) {
         const formId = req.params['formId'];
         const data = req.body;
-        PatternModel
-            .findByIdAndUpdate(formId, {$push: {data: data}},
-            ).then((before) => {
-            res.send(before);
-        });
+        FormModel
+            .findByIdAndUpdate(formId, {$push: {data: data}})
+            .then((before) => {
+                res.send(before.data);
+            });
     }
 };

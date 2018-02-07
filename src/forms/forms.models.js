@@ -5,11 +5,14 @@ const FormSchema = new Schema({
     name: String,
     inputs: [{
         name: String,
-        label: String
+        label: String,
+        type: {
+            type: String
+        },
     }],
     data: [{
         __alwaysEmpty: String,
-        values: [{}]
+        values: {}
     }]
 });
 
