@@ -7,6 +7,14 @@ module.exports = {
                 res.send(models);
             });
     },
+    getInputs: function (req, res) {
+        const formId = req.params['formId'];
+        PatternModel
+            .findById(formId)
+            .then(foundForm => {
+                res.send(foundForm.inputs);
+            });
+    },
 
     addNew: function (req, res) {
         const p = new PatternModel(req.body);
@@ -19,16 +27,10 @@ module.exports = {
     addData: function (req, res) {
         const formId = req.params['formId'];
         const data = req.body;
-        PatternModel.findByIdAndUpdate(
-            formId,
-            {$push: {data: data}},
-            {
-                returnNewDocument: true
-            }
-        ).then((before) => {
+        PatternModel
+            .findByIdAndUpdate(formId, {$push: {data: data}},
+            ).then((before) => {
             res.send(before);
         });
-    },
-
-
+    }
 };

@@ -4,6 +4,8 @@ const controllers = require('./forms.controllers');
 
 router
     .get('/', controllers.getAll)
+    .get('/:formId/inputs', controllers.getInputs)
+
     .post('/', controllers.addNew)
     .post('/:formId/data', controllers.addData)
 ;
