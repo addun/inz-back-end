@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const PatternSchema = new Schema({
+const FormSchema = new Schema({
     name: String,
     inputs: [{
         name: String,
@@ -10,6 +10,4 @@ const PatternSchema = new Schema({
 });
 
 
-const PatterModel = mongoose.model('Pattern', PatternSchema);
-
-module.exports = PatterModel;
+module.exports = mongoose.model('Form', FormSchema);

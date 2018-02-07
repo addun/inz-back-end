@@ -1,4 +1,4 @@
-const PatternModel = require('./patterns.models');
+const PatternModel = require('./forms.models');
 
 module.exports = {
     getAll: function (req, res) {
@@ -15,5 +15,4 @@ module.exports = {
                 res.send(savedModel);
             });
     }
-
 };

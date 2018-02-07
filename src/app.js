@@ -29,8 +29,8 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const patterns = require('./patterns/patterns.routers');
-app.use('/patterns', patterns);
+const patterns = require('./forms/forms.routers');
+app.use('/forms', patterns);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
