@@ -7,6 +7,7 @@ const FormSchema = new Schema({
         name: String,
         label: String
     }],
+    data: []
 });
 
 
