@@ -14,5 +14,21 @@ module.exports = {
             .then(savedModel => {
                 res.send(savedModel);
             });
-    }
+    },
+
+    addData: function (req, res) {
+        const formId = req.params['formId'];
+        const data = req.body;
+        PatternModel.findByIdAndUpdate(
+            formId,
+            {$push: {data: data}},
+            {
+                returnNewDocument: true
+            }
+        ).then((before) => {
+            res.send(before);
+        });
+    },
+
+
 };

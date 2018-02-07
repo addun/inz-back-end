@@ -7,7 +7,10 @@ const FormSchema = new Schema({
         name: String,
         label: String
     }],
-    data: []
+    data: [{
+        __alwaysEmpty: String,
+        values: [{}]
+    }]
 });
 
 

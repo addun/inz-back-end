@@ -4,8 +4,8 @@ const controllers = require('./forms.controllers');
 
 router
     .get('/', controllers.getAll)
-
     .post('/', controllers.addNew)
+    .post('/:formId/data', controllers.addData)
 ;
 
 module.exports = router;
