@@ -49,12 +49,14 @@ app.use(function (req, res, next) {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const patterns = require('./forms/forms.routers');
-app.use('/forms', patterns);
+const forms = require('./forms/forms.routers');
+const folders = require('./folders/folders.routers');
+app.use('/forms', forms);
+app.use('/folders', folders);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
+    const err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
