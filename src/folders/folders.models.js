@@ -10,7 +10,7 @@ const FolderSchema = new Schema({
     },
     isCollapse: {
         type: Boolean,
-        default: false
+        default: true
     }
 });
 

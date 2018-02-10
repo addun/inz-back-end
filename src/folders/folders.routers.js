@@ -4,11 +4,9 @@ const controllers = require('./folders.controllers');
 
 router
     .get('/', controllers.getAll)
-    .get('/:folderId/tree', controllers.getChildrenTree)
-
     .post('/', controllers.addNew)
-
-    .delete('/:folderId', controllers.removeChild)
+    .patch('/:folderId', controllers.update)
+    .delete('/:folderId', controllers.remove)
 ;
 
 module.exports = router;
