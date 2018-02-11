@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const FormSchema = new Schema({
+module.exports = mongoose.model('Form', new Schema({
     name: String,
+    folder: {
+        type: Schema.Types.ObjectId,
+        ref: 'Folders'
+    },
     inputs: [{
         name: String,
         label: String,
@@ -10,11 +14,8 @@ const FormSchema = new Schema({
             type: String
         },
     }],
-    data: [{
+    records: [{
         __alwaysEmpty: String,
         values: {}
     }]
-});
-
-
-module.exports = mongoose.model('Form', FormSchema);
+}));

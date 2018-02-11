@@ -3,8 +3,8 @@ const router = express.Router();
 const controllers = require('./folders.controllers');
 
 router
-    .get('/', controllers.getAll)
-    .post('/', controllers.addNew)
+    .get('/', controllers.getAllForm)
+    .post('/', controllers.addNewForm)
     .patch('/:folderId', controllers.update)
     .delete('/:folderId', controllers.remove)
 ;
