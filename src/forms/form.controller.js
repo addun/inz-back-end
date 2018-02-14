@@ -100,7 +100,7 @@ module.exports = {
         FormModel
             .update(
                 {"records._id": recordId},
-                {$set: {"records.$.values": req.body}}
+                {$set: {"records.$": req.body}}
             )
             .then(found => {
                 res.send({});
