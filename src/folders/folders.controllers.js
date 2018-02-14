@@ -20,11 +20,14 @@ module.exports = {
     },
     remove: function (req, res) {
         const folderId = req.params['folderId'];
+        console.log(folderId);
         FoldersModel
-            .findById(folderId)
-            .remove()
+            .findByIdAndRemove(folderId)
             .then(model => {
                 res.send(model);
+            })
+            .catch(error => {
+                res.send(error);
             })
     },
     update: function (req, res) {
@@ -36,5 +39,8 @@ module.exports = {
             .then(model => {
                 res.send(model);
             })
+            .catch(error => {
+                res.send(error);
+            });
     }
 };
