@@ -1,20 +1,25 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('./form.controller');
+const formsController = require('./form.controller');
 
 router
-    .get('/', controller.getFolderTree)
-    .get('/:formId/', controller.getForm)
-    .get('/:formId/inputs/', controller.getFormInputs)
-    .get('/:formId/records/', controller.getFormRecords)
-    .get('/records/:recordId/', controller.getRecord)
+    .get('/', formsController.getForms)
+    .post('/', formsController.addForm)
 
-    .post('/', controller.addForm)
-    .post('/:formId/records/', controller.addFormRecord)
-    .post('/records/:recordId/', controller.updateRecord)
+    .get('/:formId/', formsController.getForm)
+
+    .get('/:formId/inputs/', formsController.getFormInputs)
+
+    .get('/:formId/records/', formsController.getFormRecords)
+
+    .get('/records/:recordId/', formsController.getRecord)
 
 
-    .delete('/records/:recordId/', controller.removeRecord)
+    .post('/:formId/records/', formsController.addFormRecord)
+    .patch('/records/:recordId/', formsController.updateRecord)
+
+
+    .delete('/records/:recordId/', formsController.removeRecord)
 ;
 
 module.exports = router;
