@@ -39,7 +39,7 @@ app.use(function (req, res, next) {
 app.use(express.static(path.join(__dirname, 'public')));
 
 const forms = require('./forms/form.router');
-const folders = require('./folders/folders.routers');
+const folders = require('./folders/folders.router');
 app.use('/forms', forms);
 app.use('/folders', folders);
 
@@ -53,6 +53,7 @@ app.use(function (req, res, next) {
 // error handler
 app.use(function (err, req, res, next) {
     // set locals, only providing error in development
+    console.log('errroorororo');
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 

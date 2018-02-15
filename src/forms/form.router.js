@@ -3,13 +3,13 @@ const router = express.Router();
 const controller = require('./form.controller');
 
 router
-    .get('/', controller.getAllForm)
+    .get('/', controller.getFolderTree)
     .get('/:formId/', controller.getForm)
     .get('/:formId/inputs/', controller.getFormInputs)
     .get('/:formId/records/', controller.getFormRecords)
     .get('/records/:recordId/', controller.getRecord)
 
-    .post('/', controller.addNewForm)
+    .post('/', controller.addForm)
     .post('/:formId/records/', controller.addFormRecord)
     .post('/records/:recordId/', controller.updateRecord)
 

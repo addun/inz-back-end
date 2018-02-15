@@ -2,7 +2,7 @@ const FormModel = require('./form.schema');
 const mongoose = require('mongoose');
 
 module.exports = {
-    getAllForm: (req, res) => {
+    getFolderTree: (req, res) => {
         const query = req.query ? req.query : {};
         FormModel
             .find(query)
@@ -58,7 +58,7 @@ module.exports = {
                 res.send(found.records[0]);
             })
     },
-    addNewForm: function (req, res) {
+    addForm: function (req, res) {
         const form = new FormModel(req.body);
         form
             .save()
@@ -87,7 +87,7 @@ module.exports = {
         const recordId = req.params['recordId'];
         console.log(recordId);
         FormModel
-            .update({},
+            .updateFolder({},
                 {$pull: {"records": {_id: recordId}}},
                 {multi: true}
             )
@@ -98,7 +98,7 @@ module.exports = {
     updateRecord: function (req, res) {
         const recordId = req.params['recordId'];
         FormModel
-            .update(
+            .updateFolder(
                 {"records._id": recordId},
                 {$set: {"records.$": req.body}}
             )
