@@ -1,8 +1,9 @@
 FROM node:8.9.0
 
+#RUN add-apt-repository ppa:ubuntu-toolchain-r/test
+RUN apt-get update -y
+RUN apt-get install -y libstdc++-5-dev
+
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
 EXPOSE 3000
 CMD [ "npm", "start" ]

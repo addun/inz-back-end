@@ -17,5 +17,9 @@ module.exports = mongoose.model('Form', new Schema({
     records: [{
         __alwaysEmpty: String,
         values: {}
-    }]
+    }],
+    predefined: {
+        type: Boolean,
+        default: false
+    }
 }));
