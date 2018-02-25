@@ -18,8 +18,11 @@ module.exports = {
     removeFolder: function (req, res) {
         const folderId = req.params['folderId'];
         FoldersModel
-            .findByIdAndRemove(folderId)
-            .then(model => res.send(model))
+            .findById(folderId)
+            .then(model => {
+                model.remove();
+                res.send(model);
+            })
     },
 
     updateFolder: function (req, res) {
