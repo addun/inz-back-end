@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./src/bin/www"
+    "start": "npm run start-dev",
+    "start-prod": "node ./src/bin/www",
+    "start-dev": "nodemon ./src/bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
