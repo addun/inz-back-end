@@ -13,12 +13,8 @@ logger.level = 'debug';
 
 mongoose
     .connect('mongodb://localhost/test')
-    .then(_ => {
-        logger.info("Connected to MongoDB");
-    })
-    .catch(_ => {
-        logger.error("Error while connecting to the MongoDB");
-    });
+    .then(_ => logger.info("Connected to MongoDB"))
+    .catch(_ => logger.error("Error while connecting to the MongoDB"));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
