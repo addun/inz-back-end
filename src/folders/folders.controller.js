@@ -1,7 +1,7 @@
 const FoldersModel = require('./folders.model');
 
 module.exports = {
-    getForms: function (req, res) {
+    getFoldersTree: function (req, res) {
         FoldersModel
             .getChildrenTree(null, {}, function (err, tree) {
                 res.send(tree);

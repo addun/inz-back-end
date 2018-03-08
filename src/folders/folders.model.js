@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const tree = require('mongoose-path-tree');
-const Forms = require('./../forms/form.schema');
 
 const FolderSchema = new Schema({
     name: {
