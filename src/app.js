@@ -1,14 +1,24 @@
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
-const logger = require('morgan');
+const morganLogger = require('morgan');
+const log4js = require('log4js');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const sassMiddleware = require('node-sass-middleware');
 const mongoose = require('mongoose');
+const logger = log4js.getLogger();
 const app = express();
+logger.level = 'debug';
 
-mongoose.connect('mongodb://localhost/test');
+mongoose
+    .connect('mongodb://localhost/test')
+    .then(_ => {
+        logger.info("Connected to MongoDB");
+    })
+    .catch(_ => {
+        logger.error("Error while connecting to the MongoDB");
+    });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -17,7 +27,7 @@ app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+app.use(morganLogger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
