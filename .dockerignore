@@ -1,4 +1,6 @@
-node_modules
-mongo
 .idea
-inz-core.iml
+mongo
+node_modules
+*.iml
+docker-compose.yml
+.gitignore
