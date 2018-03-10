@@ -12,7 +12,7 @@ const app = express();
 logger.level = 'debug';
 
 mongoose
-    .connect('mongodb://localhost/test')
+    .connect('mongodb://mongo_db/inz')
     .then(_ => logger.info("Connected to MongoDB"))
     .catch(_ => logger.error("Error while connecting to the MongoDB"));
 
