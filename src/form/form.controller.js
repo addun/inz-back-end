@@ -1,4 +1,4 @@
-const FormModel = require('./form.schema');
+const FormModel = require('./form.model');
 const mongoose = require('mongoose');
 
 module.exports = {

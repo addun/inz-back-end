@@ -44,9 +44,9 @@ app.use(function (req, res, next) {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const forms = require('./forms/form.router');
+const form = require('./form/form.router');
 const folders = require('./folders/folders.router');
-app.use('/forms', forms);
+app.use('/forms', form);
 app.use('/folders', folders);
 
 // catch 404 and forward to error handler
