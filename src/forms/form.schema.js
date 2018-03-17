@@ -2,21 +2,33 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 module.exports = mongoose.model('Form', new Schema({
-    name: String,
+    name: {
+        type: String,
+        required: true
+    },
     folder: {
         type: Schema.Types.ObjectId,
         ref: 'Folders'
     },
     inputs: [{
-        name: String,
-        label: String,
+        name: {
+            type: String,
+            required: true
+        },
+        label: {
+            type: String,
+            required: true
+        },
         type: {
-            type: String
+            type: String,
+            required: true
         },
     }],
     records: [{
-        __alwaysEmpty: String,
-        values: {}
+        values: {
+            type: Schema.Types.Mixed,
+            required: true
+        }
     }],
     predefined: {
         type: Boolean,
