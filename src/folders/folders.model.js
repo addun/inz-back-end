@@ -17,21 +17,4 @@ FolderSchema.plugin(tree);
 
 const FolderModel = mongoose.model('Folder', FolderSchema);
 
-// Remove forms without folders
-// FolderSchema.post('remove', function (next) {
-//     Forms.find({})
-//         .then(models => {
-//             models.forEach(model => {
-//                 const folderId = model.folder;
-//                 FolderModel
-//                     .findById(folderId)
-//                     .then(folder => {
-//                         if (folder === null) model.remove();
-//                     })
-//             });
-//         })
-//         .catch(err => console.log(err));
-//     next();
-// });
-
 module.exports = FolderModel;

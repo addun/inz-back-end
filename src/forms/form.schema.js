@@ -8,7 +8,7 @@ module.exports = mongoose.model('Form', new Schema({
     },
     folder: {
         type: Schema.Types.ObjectId,
-        ref: 'Folders'
+        ref: 'Folder'
     },
     inputs: [{
         name: {
