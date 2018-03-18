@@ -1,5 +1,4 @@
 const FormModel = require('./form.model');
-const mongoose = require('mongoose');
 
 module.exports = {
     getForms: (req, res) => {
@@ -35,7 +34,7 @@ module.exports = {
         FormModel
             .findOne(
                 {"records._id": recordId},
-                {_id: 0, records: {$elemMatch: {_id: recordId}}}
+                {records: {$elemMatch: {_id: recordId}}}
             )
             .then(form => res.send(form.records[0]))
     },
@@ -50,10 +49,13 @@ module.exports = {
     addFormRecord: function (req, res) {
         const formId = req.params['formId'];
         const record = req.body;
-        record._id = mongoose.Types.ObjectId();
         FormModel
-            .findByIdAndUpdate(formId, {$push: {records: record}})
-            .then(_ => res.send(record))
+            .findByIdAndUpdate(
+                formId,
+                {$push: {records: record}},
+                {new: true}
+            )
+            .then(updatedForm => res.send(updatedForm.records.pop()));
     },
 
     removeRecord: function (req, res) {
@@ -76,15 +78,20 @@ module.exports = {
 
     },
 
-    updateRecord: function (req, res) {
+    updateRecord: async function (req, res) {
         const recordId = req.params['recordId'];
         const record = req.body;
         record._id = recordId;
-        FormModel
+        await FormModel
             .findOneAndUpdate(
                 {"records._id": recordId},
-                {$set: {"records.$": record}}
-            )
-            .then(found => res.send(record))
+                {$set: {"records.$": record}},
+                {new: true}
+            );
+        const updatedForm = await FormModel.findOne(
+            {"records._id": recordId},
+            {records: {$elemMatch: {_id: recordId}}}
+        );
+        res.send(updatedForm.records[0]);
     }
 };
