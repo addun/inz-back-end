@@ -11,8 +11,10 @@ const logger = log4js.getLogger();
 const app = express();
 logger.level = 'debug';
 
+const MONGO_DB_URL = process.env['MONGO_DB_URL'] ? process.env['MONGO_DB_URL'] : 'mongodb://0.0.0.0/inz';
+
 mongoose
-    .connect('mongodb://0.0.0.0/inz')
+    .connect(MONGO_DB_URL)
     .then(_ => logger.info("Connected to MongoDB"))
     .catch(_ => logger.error("Error while connecting to the MongoDB"));
 

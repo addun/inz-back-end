@@ -1,6 +1,8 @@
 .idea
 mongo
 node_modules
-*.iml
-docker-compose.yml
+.dockerignore
 .gitignore
+docker-compose.yml
+Dockerfile
+*.iml
