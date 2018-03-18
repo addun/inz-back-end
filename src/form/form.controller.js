@@ -46,16 +46,16 @@ module.exports = {
             .then(savedModel => res.send(savedModel))
     },
 
-    addFormRecord: function (req, res) {
+    addFormRecord: async function (req, res) {
         const formId = req.params['formId'];
         const record = req.body;
+        const createdRecord = (new FormModel).records.create(record);
         FormModel
             .findByIdAndUpdate(
                 formId,
-                {$push: {records: record}},
-                {new: true}
+                {$push: {records: createdRecord}},
             )
-            .then(updatedForm => res.send(updatedForm.records.pop()));
+            .then(_ => res.send(createdRecord));
     },
 
     removeRecord: function (req, res) {
@@ -78,20 +78,22 @@ module.exports = {
 
     },
 
-    updateRecord: async function (req, res) {
+    updateRecord: function (req, res) {
         const recordId = req.params['recordId'];
         const record = req.body;
         record._id = recordId;
-        await FormModel
+        FormModel
             .findOneAndUpdate(
                 {"records._id": recordId},
                 {$set: {"records.$": record}},
                 {new: true}
-            );
-        const updatedForm = await FormModel.findOne(
-            {"records._id": recordId},
-            {records: {$elemMatch: {_id: recordId}}}
-        );
-        res.send(updatedForm.records[0]);
+            )
+            .then(_ => {
+                FormModel.findOne(
+                    {"records._id": recordId},
+                    {records: {$elemMatch: {_id: recordId}}}
+                )
+                    .then(updatedForm => res.send(updatedForm.records[0]));
+            });
     }
 };
