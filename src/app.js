@@ -13,10 +13,26 @@ logger.level = 'debug';
 
 const MONGO_DB_URL = process.env['MONGO_DB_URL'] ? process.env['MONGO_DB_URL'] : 'mongodb://0.0.0.0/inz';
 
-mongoose
-    .connect(MONGO_DB_URL)
-    .then(_ => logger.info("Connected to MongoDB"))
-    .catch(_ => logger.error("Error while connecting to the MongoDB"));
+function connectToDB() {
+    mongoose
+        .connect(MONGO_DB_URL, {autoReconnect: false})
+        .then(_ => logger.info("Connected to MongoDB"))
+        .catch(_ => {
+            logger.error("Error while connecting to the MongoDB");
+            logger.info("Trying to reconnect");
+            setTimeout(connectToDB, 5000);
+        });
+}
+
+['disconnected', 'close'].forEach(element => {
+    mongoose.connection.on(element, () => {
+        logger.error(`${element} from MongoDB`);
+        connectToDB();
+    });
+});
+
+
+connectToDB();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
