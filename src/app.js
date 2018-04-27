@@ -24,11 +24,10 @@ function connectToDB() {
         });
 }
 
-['disconnected', 'close'].forEach(element => {
-    mongoose.connection.on(element, () => {
-        logger.error(`${element} from MongoDB`);
-        connectToDB();
-    });
+mongoose.connection.on('disconnected', () => {
+    logger.error(`Disconnected from database`);
+    logger.info("Trying to reconnect");
+    setTimeout(connectToDB, 5000);
 });
 
 
