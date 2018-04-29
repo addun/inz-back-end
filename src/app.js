@@ -5,7 +5,6 @@ const morganLogger = require('morgan');
 const log4js = require('log4js');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const sassMiddleware = require('node-sass-middleware');
 const mongoose = require('mongoose');
 const logger = log4js.getLogger();
 const app = express();
@@ -33,23 +32,12 @@ mongoose.connection.on('disconnected', () => {
 
 connectToDB();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
 
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(morganLogger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(sassMiddleware({
-    src: path.join(__dirname, 'public'),
-    dest: path.join(__dirname, 'public'),
-    indentedSyntax: true, // true = .sass and false = .scss
-    sourceMap: true
-}));
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -58,8 +46,6 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 const form = require('./form/form.router');
 const folders = require('./folders/folders.router');
@@ -81,7 +67,9 @@ app.use(function (err, req, res, next) {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.send({
+        "error": "not found"
+    })
 });
 
 module.exports = app;
