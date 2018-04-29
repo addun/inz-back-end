@@ -6,6 +6,7 @@ const log4js = require('log4js');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const basicAuth = require('express-basic-auth')
 const logger = log4js.getLogger();
 const app = express();
 logger.level = 'debug';
@@ -46,6 +47,21 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
+
+app.use(basicAuth({
+    users: {'admin': 'admin'},
+    unauthorizedResponse: function (req) {
+        if (req.auth) {
+            return {
+                error: "Incorrect credentials provided"
+            };
+        } else {
+            return {
+                error: "No credentials provided"
+            }
+        }
+    }
+}));
 
 const form = require('./form/form.router');
 const folders = require('./folders/folders.router');
