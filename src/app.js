@@ -17,7 +17,7 @@ let config;
 try {
     config = require(`./environments/environment.${env}`);
     logger.info(`Application started with ${env} environment`);
-} catch {
+} catch (error) {
     logger.error(`Cannot find "environment.${env}.js" file`);
     process.exit();
 }
