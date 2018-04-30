@@ -50,14 +50,19 @@ app.use(cookieParser());
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    next(); 
+});
+
+app.options("/*", function(req, res, next){
+  res.sendStatus(200);
 });
 
 app.use(basicAuth({
     users: {[config.auth.user]: config.auth.password},
+    challenge: true,
     unauthorizedResponse: function (req) {
+	console.log(req.headers);
         if (req.auth) {
             return {error: "Incorrect credentials provided"};
         } else {
