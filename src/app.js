@@ -51,18 +51,17 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', '*');
-    next(); 
+    next();
 });
 
-app.options("/*", function(req, res, next){
-  res.sendStatus(200);
+app.options("/*", function (req, res, next) {
+    res.sendStatus(200);
 });
 
 app.use(basicAuth({
     users: {[config.auth.user]: config.auth.password},
     challenge: true,
     unauthorizedResponse: function (req) {
-	console.log(req.headers);
         if (req.auth) {
             return {error: "Incorrect credentials provided"};
         } else {
@@ -70,6 +69,13 @@ app.use(basicAuth({
         }
     }
 }));
+
+app.get("/auth", function (req, res, next) {
+    res.status(200);
+    res.send({
+        credentials: "OK"
+    })
+});
 
 const form = require('./form/form.router');
 const folders = require('./folders/folders.router');
