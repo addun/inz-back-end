@@ -60,7 +60,6 @@ app.options("/*", function (req, res, next) {
 
 app.use(basicAuth({
     users: {[config.auth.user]: config.auth.password},
-    challenge: true,
     unauthorizedResponse: function (req) {
         if (req.auth) {
             return {error: "Incorrect credentials provided"};
