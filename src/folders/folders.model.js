@@ -6,10 +6,6 @@ const FolderSchema = new Schema({
     name: {
         type: String,
         required: true
-    },
-    isCollapse: {
-        type: Boolean,
-        default: true
     }
 });
 
