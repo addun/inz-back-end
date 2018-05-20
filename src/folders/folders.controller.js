@@ -7,7 +7,14 @@ module.exports = {
                 res.send(tree);
             });
     },
-
+    getFolder: function (req, res) {
+        FoldersModel
+            .findById(req.params['folderId'])
+            .then(model => {
+                res.send(model);
+            })
+        ;
+    },
     addFolder: function (req, res) {
         const folder = new FoldersModel(req.body);
         folder
