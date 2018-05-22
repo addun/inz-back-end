@@ -2,17 +2,24 @@ const FormModel = require('./form.model');
 
 module.exports = {
     getForms: (req, res) => {
-        const query = req.query ? req.query : {};
         FormModel
-            .find(query)
+            .find()
             .then(forms => res.send(forms));
     },
 
     getForm: function (req, res) {
         const formId = req.params['formId'];
         FormModel
-            .findById(formId)
-            .then(form => res.send(form));
+            .findOne({
+                folder: formId
+            })
+            .then(form => {
+                if (form) {
+                    res.send(form);
+                } else {
+                    res.status(404).send(form);
+                }
+            });
     },
 
     getFormInputs: function (req, res) {

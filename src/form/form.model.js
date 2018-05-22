@@ -8,7 +8,11 @@ const formSchema = new Schema({
     },
     folder: {
         type: Schema.Types.ObjectId,
-        ref: 'Folder'
+        ref: 'Folder',
+        required: true,
+        index: true,
+        unique : true,
+        dropDups: true
     },
     inputs: [{
         name: {
