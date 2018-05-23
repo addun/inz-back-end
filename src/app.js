@@ -76,9 +76,9 @@ app.get("/auth", function (req, res, next) {
     })
 });
 
-const form = require('./form/form.router');
+const formApp = require('./form/form.app');
 const folders = require('./folders/folders.router');
-app.use('/forms', form);
+app.use('/forms', formApp);
 app.use('/folders', folders);
 
 // catch 404 and forward to error handler
@@ -91,14 +91,14 @@ app.use(function (req, res, next) {
 // error handler
 app.use(function (err, req, res, next) {
     // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
     // render the error page
-    res.status(err.status || 500);
-    res.send({
-        error: "Page not found"
-    })
+    try {
+        res.status(err.output.statusCode);
+        res.send(err.output.payload);
+    } catch (e) {
+        res.status(500);
+        res.send(err);
+    }
 });
 
 module.exports = app;
