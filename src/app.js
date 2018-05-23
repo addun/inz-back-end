@@ -77,9 +77,9 @@ app.get("/auth", function (req, res, next) {
 });
 
 const formApp = require('./form/form.app');
-const folders = require('./folders/folders.router');
+const folderApp = require('./folder/folder.app');
 app.use('/forms', formApp);
-app.use('/folders', folders);
+app.use('/folders', folderApp);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
