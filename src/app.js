@@ -1,3 +1,5 @@
+process.env['NODE_CONFIG_DIR'] = process.cwd() + '/src/configuration';
+const config = require('config');
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -9,18 +11,7 @@ const mongoose = require('mongoose');
 const basicAuth = require('express-basic-auth');
 const logger = log4js.getLogger();
 const app = express();
-logger.level = 'debug';
-
-const argv = require('yargs').argv;
-const env = argv["env"];
-let config;
-try {
-    config = require(`./environments/environment.${env}`);
-    logger.info(`Application started with ${env} environment`);
-} catch (error) {
-    logger.error(`Cannot find "environment.${env}.js" file`);
-    process.exit();
-}
+logger.level = config.logger.level;
 
 function connectToDB() {
     mongoose

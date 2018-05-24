@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "start": "npm run start-dev",
-    "start-prod": "node ./src/bin/www.js --env=prod",
-    "start-dev": "nodemon -x ./src/bin/www.js --env=dev"
+    "start-prod": "export NODE_CONFIG_ENV=production && node ./src/bin/www.js --env=prod",
+    "start-dev": "export NODE_CONFIG_ENV=development && nodemon -x ./src/bin/www.js"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
     "boom": "^7.2.0",
+    "config": "^1.30.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
@@ -19,8 +20,7 @@
     "mongoose": "^5.0.3",
     "mongoose-data-tree": "^2.0.3",
     "morgan": "~1.9.0",
-    "serve-favicon": "~2.4.5",
-    "yargs": "^11.0.0"
+    "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
     "nodemon": "^1.14.12"

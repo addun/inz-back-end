@@ -6,5 +6,8 @@ module.exports = {
     database: {
         host: '0.0.0.0',
         name: 'inz'
+    },
+    logger: {
+        lvl: 'debug'
     }
 };

@@ -6,5 +6,8 @@ module.exports = {
     database: {
         host: process.env['DB_HOST'],
         name: process.env['DB_NAME']
+    },
+    logger: {
+      lvl: 'info'
     }
 };
