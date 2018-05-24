@@ -8,6 +8,6 @@ module.exports = {
         name: process.env['DB_NAME']
     },
     logger: {
-      lvl: 'info'
+      level: 'info'
     }
 };

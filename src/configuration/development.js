@@ -8,6 +8,6 @@ module.exports = {
         name: 'inz'
     },
     logger: {
-        lvl: 'debug'
+        level: 'debug'
     }
 };
