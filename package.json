@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "npm run start-dev",
-    "start-prod": "node ./src/bin/www --env=prod",
-    "start-dev": "nodemon -x ./src/bin/www --env=dev"
+    "start-prod": "node ./src/bin/www.js --env=prod",
+    "start-dev": "nodemon -x ./src/bin/www.js --env=dev"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
