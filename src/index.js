@@ -34,7 +34,7 @@ app.get("/auth", function (req, res, next) {
 app.use('/forms', require('./app/form/form.app'));
 app.use('/folders', require('./app/folder/folder.app'));
 app.use(function (req, res, next) {
-    const err = boom.notFound('This page does existing');
+    const err = boom.notFound('This page does not existing');
     next(err);
 });
 app.use(function (err, req, res, next) {
