@@ -1,1 +1,9 @@
-[![BCH compliance](https://bettercodehub.com/edge/badge/inz-adrianbury/back-end?branch=master)](https://bettercodehub.com/)
+## Wymagania
+* NodeJS 9.8.0
+* MongoDB 3.7.1
+
+## Uruchomienie aplikacji
+```bash
+$ npm install
+$ npm start
+```
